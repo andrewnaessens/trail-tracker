@@ -1,0 +1,32 @@
+<form class="box" action="/category/{{category._id}}/addtrail" method="POST">
+  <label>Enter Trail Details:</label>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <label class="label">Title</label>
+        <input class="input" type="text" placeholder="Enter Title" name="title">
+      </div>
+      <div class="field">
+        <label class="label">Description</label>
+        <input class="input" type="text" placeholder="Enter Description" name="description">
+      </div>
+      <div class="field">
+        <label class="label">Location</label>
+        <input class="input" type="text" placeholder="Enter Location" name="location">
+      </div>
+      <div class="field">
+        <label class="label">Lattitude</label>
+        <input class="input" type="text" placeholder="52.160858" name="lattitude">
+      </div>
+      <div class="field">
+        <label class="label">Longitude</label>
+        <input class="input" type="text" placeholder="-7.152420" name="longitude">
+      </div>
+      <div class="field">
+        <label class="label">Distance</label>
+        <input class="input" type="text" placeholder="Enter Distance" name="distance">
+      </div>
+    </div>
+  </div>
+  <button class="button is-primary">Add Trail</button>
+</form>

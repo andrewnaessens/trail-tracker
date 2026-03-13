@@ -1,0 +1,48 @@
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>Trail</th>
+      <th>Description</th>
+      <th>Location</th>
+      <th>Lattitude</th>
+      <th>Longitude</th>
+      <th>Distance</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each category.trails}}
+      <tr>
+        <td>
+          {{title}}
+        </td>
+        <td>
+          {{description}}
+        </td>
+        <td>
+          {{location}}
+        </td>
+        <td>
+          {{lattitude}}
+        </td>
+        <td>
+          {{longitude}}
+        </td>
+        <td>
+          {{distance}}
+        </td>
+        <td>
+          <a href="/trail/{{../category._id}}/edittrail/{{_id}}" class="ui icon button">
+            <i class="fas fa-edit"></i>
+          </a>
+        </td>
+        <td>
+          <a href="/category/{{../category._id}}/deletetrail/{{_id}}" class="ui icon button">
+            <i class="fas fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
