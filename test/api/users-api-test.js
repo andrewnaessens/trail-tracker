@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import { assertSubset } from "../test-utils.js";
 import { trailtrackerService } from "./trailtracker-service.js";
-import { maggie, testUsers } from "../fixtures.js";
+import { maggie, testUsers, admin } from "../fixtures.js";
 import { db } from "../../src/models/db.js";
 
 const users = new Array(testUsers.length);
@@ -55,6 +55,7 @@ suite("User API tests", () => {
   test("get a user - deleted user", async () => {
     await trailtrackerService.deleteAllUsers();
     await trailtrackerService.createUser(maggie);
+    await trailtrackerService.createUser(admin);
     await trailtrackerService.authenticate(maggie);
     try {
       const returnedUser = await trailtrackerService.getUser(users[0]._id);

@@ -6,12 +6,25 @@ export const dashboardController = {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
       const category = await db.categoryStore.getUserCategories(loggedInUser._id);
-      const viewData = {
-        title: "TrailTracker Dashboard",
-        user: loggedInUser,
-        category: category,
-      };
-      return h.view("dashboard-view", viewData);
+      const thisUser = await db.userStore.getUserById(loggedInUser._id);
+      const allUsers = await db.userStore.getAllUsers();
+      if ( thisUser.firstName === "admin" ) {
+        const viewData = {
+          title: "TrailTracker Admin Dashboard",
+          user: loggedInUser,
+          users: allUsers,
+        };
+        return h.view("admin-dashboard-view", viewData);
+      }
+      // eslint-disable-next-line no-else-return
+      else {
+        const viewData = {
+          title: "TrailTracker Dashboard",
+          user: loggedInUser,
+          category: category,
+        };
+        return h.view("dashboard-view", viewData);
+      }
     },
   },
 
