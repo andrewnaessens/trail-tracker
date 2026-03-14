@@ -1,0 +1,19 @@
+{{#each users}}
+  <div class="box box-link-hover-shadow">
+    <h2 class="title">
+      {{email}}
+    </h2>
+    <h3 class="title is-4">
+      {{firstName}}
+      {{lastName}}
+    </h3>
+    <a href="/profile/{{_id}}" class="button">
+      <span class="icon is-small">
+        <i class="fas fa-folder-open"></i>
+      </span>
+    </a>
+    <a href="/dashboard/deleteuser/{{_id}}" class="button">
+      <i class="fas fa-trash"></i>
+    </a>
+  </div>
+{{/each}}
