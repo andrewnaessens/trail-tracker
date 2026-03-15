@@ -1,5 +1,17 @@
 # Trail Tracker Changelog
 
+## version 0.3.0
+
+- feat(db): add mongo seeder and sample data
+- include mais-mongoose-seeder into project
+- seed a set of sample data
+
+- test(fixtures): add user credentials for API auth
+- feat(auth): integrate JWT with swagger and tests
+- annotate authenticate route with documentation
+- introduce authenticate Swagger return values
+- introduce authenticate Swagger parameter validation
+
 ## version 0.2.0
 
 - test(admin): add user to fixtures
