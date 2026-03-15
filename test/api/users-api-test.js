@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import { assertSubset } from "../test-utils.js";
 import { trailtrackerService } from "./trailtracker-service.js";
-import { maggie, testUsers, admin } from "../fixtures.js";
+import { maggie, maggieCredentials, testUsers, admin } from "../fixtures.js";
 import { db } from "../../src/models/db.js";
 
 const users = new Array(testUsers.length);
@@ -10,14 +10,14 @@ suite("User API tests", () => {
   setup(async () => {
     trailtrackerService.clearAuth();
     await trailtrackerService.createUser(maggie);
-    await trailtrackerService.authenticate(maggie);
+    await trailtrackerService.authenticate(maggieCredentials);
     await trailtrackerService.deleteAllUsers();
     for (let i = 0; i < testUsers.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
       users[0] = await trailtrackerService.createUser(testUsers[i]);
     }
     await trailtrackerService.createUser(maggie);
-    await trailtrackerService.authenticate(maggie);
+    await trailtrackerService.authenticate(maggieCredentials);
   });
   teardown(async () => {});
 
@@ -32,7 +32,7 @@ suite("User API tests", () => {
     assert.equal(returnedUsers.length, 4);
     await trailtrackerService.deleteAllUsers();
     await trailtrackerService.createUser(maggie);
-    await trailtrackerService.authenticate(maggie);
+    await trailtrackerService.authenticate(maggieCredentials);
     returnedUsers = await trailtrackerService.getAllUsers();
     assert.equal(returnedUsers.length, 1);
   });
@@ -55,8 +55,7 @@ suite("User API tests", () => {
   test("get a user - deleted user", async () => {
     await trailtrackerService.deleteAllUsers();
     await trailtrackerService.createUser(maggie);
-    await trailtrackerService.createUser(admin);
-    await trailtrackerService.authenticate(maggie);
+    await trailtrackerService.authenticate(maggieCredentials);
     try {
       const returnedUser = await trailtrackerService.getUser(users[0]._id);
       assert.fail("Should not return a response");
