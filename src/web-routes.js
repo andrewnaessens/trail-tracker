@@ -31,4 +31,5 @@ export const webRoutes = [
 
   { method: "GET", path: "/profile/{id}", config: profileController.index },
   { method: "POST", path: "/profile/updateuser/{id}", config: profileController.updateUser },
+  { method: "POST", path: "/category/{id}/uploadimage", config: categoryController.uploadImage },
 ];
