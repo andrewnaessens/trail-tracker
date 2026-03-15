@@ -28,4 +28,7 @@ export const webRoutes = [
   { method: "POST", path: "/trail/{id}/updatetrail/{trailid}", config: trailController.update },
 
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
+
+  { method: "GET", path: "/profile/{id}", config: profileController.index },
+  { method: "POST", path: "/profile/updateuser/{id}", config: profileController.updateUser },
 ];
