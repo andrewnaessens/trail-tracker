@@ -1,18 +1,20 @@
 import { CategorySpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
+import { analyticsService } from "../services/analytics-service.js";
 
 export const dashboardController = {
   index: {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
-      const category = await db.categoryStore.getUserCategories(loggedInUser._id);
-      const thisUser = await db.userStore.getUserById(loggedInUser._id);
+      const userfirstName = loggedInUser.firstName
+      const category = await db.categoryStore.getUserCategories(loggedInUser);
       const allUsers = await db.userStore.getAllUsers();
-      if ( thisUser.firstName === "admin" ) {
+      const users = await analyticsService.getAllUserAnalytics(allUsers);
+      if ( userfirstName === "admin" ) {
         const viewData = {
           title: "TrailTracker Admin Dashboard",
           user: loggedInUser,
-          users: allUsers,
+          users: users,
         };
         return h.view("admin-dashboard-view", viewData);
       }
