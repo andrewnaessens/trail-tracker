@@ -1,0 +1,24 @@
+<form action="/profile/updateuser/{{user._id}}" method="POST">
+  <label class="title is-5">Update User Details:</label>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <label class="label">First Name</label>
+        <input class="input" type="text" name="firstName", value="{{user.firstName}}">
+      </div>
+      <div class="field">
+        <label class="label">Last Name</label>
+        <input class="input" type="text" name="lastName", value="{{user.lastName}}">
+      </div>
+      <div class="field">
+        <label class="label">Email</label>
+        <input class="input" type="text" name="email" value="{{user.email}}">
+      </div>
+      <div class="field">
+        <label class="label">Password</label>
+        <input class="input" type="text" name="password", value="{{user.password}}">
+      </div>
+    </div>
+  </div>
+  <button class="button is-primary">Update User</button>
+</form>
