@@ -1,5 +1,13 @@
 # Trail Tracker Changelog
 
+## version 1.0.0
+
+- introduce image upload support via cloudinary
+- feat(models): implement cloudinary storage
+- feat(category): add image upload
+- feat(routes): add category image upload route
+- feat(views): add category image and upload
+
 ## version 0.3.0
 
 - feat(db): add mongo seeder and sample data
