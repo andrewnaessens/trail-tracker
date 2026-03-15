@@ -1,5 +1,25 @@
 # Trail Tracker Changelog
 
+## version 0.2.0
+
+- test(admin): add user to fixtures
+- test(admin): add user to API tests
+- feat(accounts): add deleteUser action
+- feat(dashboard): redirect user based on role
+- feat(admin): add user list partial
+- feat(admin): add dashboard view
+- feat(admin): add delete user route
+
+- feat(models): add update method to user stores
+- feat(services): add user analytics utility
+- feat(profile): add update user and analytics
+- feat(dashboard): implement user analytics
+- feat: pass views userId for profile access
+- feat(routes): add user profile routes
+- feat(views): add partial and view for user profile
+- feat(nav): add profile link to menu partial
+- feat(views): add partials for user analytics
+
 ## version 0.1.0
 
 - added .gitgnore from <https://github.com/github/gitignore>
