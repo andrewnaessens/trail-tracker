@@ -1,11 +1,14 @@
 {{> menu}}
 
-<section class="section">
-  <div class="title">
-    {{category.title}}
+<section class="section columns is-vcentered">
+  <div class="column">
+    <div class="title">
+      {{category.title}}
+    </div>
+    {{> list-trails}}
+    {{> add-trail}}
   </div>
-  {{> list-trails}}
-  {{> add-trail}}
-
-
+  <div class="column">
+    {{> category-image }}
+  </div>
 </section>
