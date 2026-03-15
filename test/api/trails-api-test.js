@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import { assertSubset } from "../test-utils.js";
 import { trailtrackerService } from "./trailtracker-service.js";
-import { maggie, difficult, testCategories, testTrails, coumshingaunLough } from "../fixtures.js";
+import { maggie, maggieCredentials, difficult, testCategories, testTrails, coumshingaunLough } from "../fixtures.js";
 
 suite("Trail API tests", () => {
   let user = null;
@@ -10,12 +10,12 @@ suite("Trail API tests", () => {
   setup(async () => {
     trailtrackerService.clearAuth();
     user = await trailtrackerService.createUser(maggie);
-    await trailtrackerService.authenticate(maggie);
+    await trailtrackerService.authenticate(maggieCredentials);
     await trailtrackerService.deleteAllCategories();
     await trailtrackerService.deleteAllTrails();
     await trailtrackerService.deleteAllUsers();
     user = await trailtrackerService.createUser(maggie);
-    await trailtrackerService.authenticate(maggie);
+    await trailtrackerService.authenticate(maggieCredentials);
     difficult.userid = user._id;
     difficultyDifficult = await trailtrackerService.createCategory(difficult);
   });
