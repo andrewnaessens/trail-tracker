@@ -1,6 +1,6 @@
 {
-  "name": "trailfinder",
-  "version": "0.1.0",
+  "name": "trailtracker",
+  "version": "1.0.0",
   "description": "A hiking trail web application.",
   "main": "index.js",
   "type": "module",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wit-hdip-comp-sci-2021/playtime.git"
+    "url": "git+https://github.com/andrewnaessens/trailtracker.git"
   },
   "keywords": [
     "node",
