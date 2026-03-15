@@ -5,13 +5,13 @@ export const accountsController = {
   index: {
     auth: false,
     handler: function (request, h) {
-      return h.view("main", { title: "Welcome to Category" });
+      return h.view("main", { title: "Welcome to TrailTracker" });
     },
   },
   showSignup: {
     auth: false,
     handler: function (request, h) {
-      return h.view("signup-view", { title: "Sign up for Category" });
+      return h.view("signup-view", { title: "Sign up for TrailTracker" });
     },
   },
   signup: {
@@ -32,7 +32,7 @@ export const accountsController = {
   showLogin: {
     auth: false,
     handler: function (request, h) {
-      return h.view("login-view", { title: "Login to Category" });
+      return h.view("login-view", { title: "Login to TrailTracker" });
     },
   },
   login: {
@@ -67,5 +67,13 @@ export const accountsController = {
       return { isValid: false };
     }
     return { isValid: true, credentials: user };
+  },
+
+  deleteUser: {
+    handler: async function (request, h) {
+      const user = await db.userStore.getUserById(request.params.id);
+      await db.userStore.deleteUserById(user._id);
+      return h.redirect("/dashboard");
+    },
   },
 };

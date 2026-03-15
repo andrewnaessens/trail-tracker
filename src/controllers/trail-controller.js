@@ -4,10 +4,13 @@ import { db } from "../models/db.js";
 export const trailController = {
   index: {
     handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
       const category = await db.categoryStore.getCategoryById(request.params.id);
       const trail = await db.trailStore.getTrailById(request.params.trailid);
+      
       const viewData = {
         title: "Edit Trail",
+        user: loggedInUser,
         category: category,
         trail: trail,
       };

@@ -3,6 +3,7 @@ import { accountsController } from "./controllers/accounts-controller.js";
 import { dashboardController } from "./controllers/dashboard-controller.js";
 import { categoryController } from "./controllers/category-controller.js";
 import { trailController } from "./controllers/trail-controller.js";
+import { profileController } from "./controllers/profile-controller.js";
 
 export const webRoutes = [
   { method: "GET", path: "/", config: accountsController.index },
@@ -17,6 +18,7 @@ export const webRoutes = [
   { method: "GET", path: "/dashboard", config: dashboardController.index },
   { method: "POST", path: "/dashboard/addcategory", config: dashboardController.addCategory },
   { method: "GET", path: "/dashboard/deletecategory/{id}", config: dashboardController.deleteCategory },
+  { method: "GET", path: "/dashboard/deleteuser/{id}", config: accountsController.deleteUser },
 
   { method: "GET", path: "/category/{id}", config: categoryController.index },
   { method: "POST", path: "/category/{id}/addtrail", config: categoryController.addTrail },
@@ -26,4 +28,7 @@ export const webRoutes = [
   { method: "POST", path: "/trail/{id}/updatetrail/{trailid}", config: trailController.update },
 
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
+
+  { method: "GET", path: "/profile/{id}", config: profileController.index },
+  { method: "POST", path: "/profile/updateuser/{id}", config: profileController.updateUser },
 ];
