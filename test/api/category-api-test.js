@@ -2,7 +2,7 @@ import { EventEmitter } from "events";
 import { assert } from "chai";
 import { trailtrackerService } from "./trailtracker-service.js";
 import { assertSubset } from "../test-utils.js";
-import { maggie, difficult, testCategories } from "../fixtures.js";
+import { maggie, maggieCredentials, difficult, testCategories } from "../fixtures.js";
 
 EventEmitter.setMaxListeners(25);
 
@@ -12,11 +12,11 @@ suite("Category API tests", () => {
   setup(async () => {
     trailtrackerService.clearAuth();
     user = await trailtrackerService.createUser(maggie);
-    await trailtrackerService.authenticate(maggie);
+    await trailtrackerService.authenticate(maggieCredentials);
     await trailtrackerService.deleteAllCategories();
     await trailtrackerService.deleteAllUsers();
     user = await trailtrackerService.createUser(maggie);
-    await trailtrackerService.authenticate(maggie);
+    await trailtrackerService.authenticate(maggieCredentials);
     difficult.userid = user._id;
   });
 

@@ -1,26 +1,26 @@
 import { assert } from "chai";
 import { trailtrackerService } from "./trailtracker-service.js";
 import { decodeToken } from "../../src/api/jwt-utils.js";
-import { maggie } from "../fixtures.js";
+import { maggie, maggieCredentials } from "../fixtures.js";
 
 suite("Authentication API tests", async () => {
   setup(async () => {
     trailtrackerService.clearAuth();
     await trailtrackerService.createUser(maggie);
-    await trailtrackerService.authenticate(maggie);
+    await trailtrackerService.authenticate(maggieCredentials);
     await trailtrackerService.deleteAllUsers();
   });
 
   test("authenticate", async () => {
     const returnedUser = await trailtrackerService.createUser(maggie);
-    const response = await trailtrackerService.authenticate(maggie);
+    const response = await trailtrackerService.authenticate(maggieCredentials);
     assert(response.success);
     assert.isDefined(response.token);
   });
 
   test("verify Token", async () => {
     const returnedUser = await trailtrackerService.createUser(maggie);
-    const response = await trailtrackerService.authenticate(maggie);
+    const response = await trailtrackerService.authenticate(maggieCredentials);
 
     const userInfo = decodeToken(response.token);
     assert.equal(userInfo.email, returnedUser.email);
