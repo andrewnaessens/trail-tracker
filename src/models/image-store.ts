@@ -2,14 +2,14 @@ import * as cloudinary from "cloudinary";
 import { writeFileSync } from "fs";
 import dotenv from "dotenv";
 
-dotenv.config();
+dotenv.config() as any;
 
 const credentials = {
   cloud_name: process.env.cloudinary_name,
   api_key: process.env.cloudinary_key,
   api_secret: process.env.cloudinary_secret
 };
-cloudinary.config(credentials);
+cloudinary.v2.config(credentials);
 
 export const imageStore = {
 
@@ -18,13 +18,13 @@ export const imageStore = {
     return result.resources;
   },
 
-  uploadImage: async function(imagefile) {
+  uploadImage: async function(imagefile: string) {
     writeFileSync("./public/temp.img", imagefile);
     const response = await cloudinary.v2.uploader.upload("./public/temp.img");
     return response.url;
   },
 
-  deleteImage: async function(img) {
+  deleteImage: async function(img: string) {
     await cloudinary.v2.uploader.destroy(img, {});
   }
 };

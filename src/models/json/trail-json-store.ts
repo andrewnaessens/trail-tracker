@@ -1,3 +1,4 @@
+import { Category, Trail } from "../../types/trail-tracker-types";
 import { v4 } from "uuid";
 import { db } from "./store-utils.js";
 
@@ -7,7 +8,7 @@ export const trailJsonStore = {
     return db.data.trails;
   },
 
-  async addTrail(categoryId, trail) {
+  async addTrail(categoryId: Category, trail: Trail): Promise<Trail | null> {
     await db.read();
     trail._id = v4();
     trail.categoryid = categoryId;
@@ -16,23 +17,23 @@ export const trailJsonStore = {
     return trail;
   },
 
-  async getTrailsByCategoryId(id) {
+  async getTrailsByCategoryId(id: string): Promise<Trail | null> {
     await db.read();
-    let t = db.data.trails.filter((trail) => trail.categoryid === id);
+    let t = db.data.trails.filter((trail: Trail) => trail.categoryid === id);
     if (t === undefined) t = null;
     return t;
   },
 
-  async getTrailById(id) {
+  async getTrailById(id: string): Promise<Trail | null> {
     await db.read();
-    let t = db.data.trails.find((trail) => trail._id === id);
+    let t = db.data.trails.find((trail: Trail) => trail._id === id);
     if (t === undefined) t = null;
     return t;
   },
 
-  async deleteTrail(id) {
+  async deleteTrail(id: string) {
     await db.read();
-    const index = db.data.trails.findIndex((trail) => trail._id === id);
+    const index = db.data.trails.findIndex((trail: Trail) => trail._id === id);
     if (index !== -1) db.data.trails.splice(index, 1);
     await db.write();
   },
@@ -42,7 +43,7 @@ export const trailJsonStore = {
     await db.write();
   },
 
-  async updateTrail(trail, updatedTrail) {
+  async updateTrail(trail: Trail, updatedTrail: any) {
     trail.title = updatedTrail.title;
     trail.description = updatedTrail.description;
     trail.location = updatedTrail.location;

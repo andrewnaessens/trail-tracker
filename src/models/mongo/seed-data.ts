@@ -30,11 +30,11 @@ export const seedData = {
     _model: "Category",
     easy: {
       title: "Easy",
-      userid: "->users.bart"
+      userid: "->users.homer"
     },
     medium: {
       title: "Medium",
-      userid: "->users.bart"
+      userid: "->users.marge"
     }, 
     difficult: {
       title: "Difficult",
@@ -48,7 +48,7 @@ export const seedData = {
       description: "Difficult loop trail of Coumshingaun lough.",
       location: "Co. Waterford",
       lattitude: 52.2503,
-      longitude: 7.5247,
+      longitude: -7.5247,
       distance: 7.5,
       categoryid: "->categories.difficult"
     },
@@ -57,7 +57,7 @@ export const seedData = {
       description: "Difficult mountain trail to the summit of Errigal",
       location: "Co. Donegal",
       lattitude: 55.0343,
-      longitude: 8.1130,
+      longitude: -8.1130,
       distance: 5.3,
       categoryid: "->categories.difficult"
     },
@@ -66,7 +66,7 @@ export const seedData = {
       description: "Difficult four day hike through the Slieve Bloom Mountains.",
       location: "Co. Laois",
       lattitude: 53.0744,
-      longitude: 7.6134,
+      longitude: -7.6134,
       distance: 71.4,
       categoryid: "->categories.difficult"
     },
@@ -75,7 +75,7 @@ export const seedData = {
       description: "Easy trail from Kilkenny to Bennettsbridge.",
       location: "Co. Kilkenny",
       lattitude: 52.6549,
-      longitude: 7.2464,
+      longitude: -7.2464,
       distance: 8.2,
       categoryid: "->categories.easy"
     },

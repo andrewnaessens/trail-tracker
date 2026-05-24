@@ -1,3 +1,4 @@
+import { User } from "../../types/trail-tracker-types.js";
 import { v4 } from "uuid";
 import { db } from "./store-utils.js";
 
@@ -7,7 +8,7 @@ export const userJsonStore = {
     return db.data.users;
   },
 
-  async addUser(user) {
+  async addUser(user: User): Promise<User | null>  {
     await db.read();
     user._id = v4();
     db.data.users.push(user);
@@ -15,23 +16,23 @@ export const userJsonStore = {
     return user;
   },
 
-  async getUserById(id) {
+  async getUserById(id: string): Promise<User | null> {
     await db.read();
-    let u = db.data.users.find((user) => user._id === id);
+    let u = db.data.users.find((user: User) => user._id === id);
     if (u === undefined) u = null;
     return u;
   },
 
-  async getUserByEmail(email) {
+  async getUserByEmail(email: string): Promise<User | null> {
     await db.read();
-    let u = db.data.users.find((user) => user.email === email);
+    let u = db.data.users.find((user: User) => user.email === email);
     if (u === undefined) u = null;
     return u;
   },
 
-  async deleteUserById(id) {
+  async deleteUserById(id: string) {
     await db.read();
-    const index = db.data.users.findIndex((user) => user._id === id);
+    const index = db.data.users.findIndex((user: User) => user._id === id);
     if (index !== -1) db.data.users.splice(index, 1);
     await db.write();
   },
@@ -41,7 +42,7 @@ export const userJsonStore = {
     await db.write();
   },
 
-  async updateUser(user, updatedUser) {
+  async updateUser(user: User, updatedUser: any) {
     user.firstName = updatedUser.firstName;
     user.lastName = updatedUser.lastName;
     user.email = updatedUser.email;

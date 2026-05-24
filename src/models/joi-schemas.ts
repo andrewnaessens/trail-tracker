@@ -6,6 +6,7 @@ export const JwtAuth = Joi.object()
   .keys({
     success: Joi.boolean().example("true").required(),
     token: Joi.string().example("eyJhbGciOiJND.g5YmJisIjoiaGYwNTNjAOhE.gCWGmY5-YigQw0DCBo").required(),
+    userid: Joi.any(),
   })
   .label("JwtAuth");
 
@@ -37,6 +38,7 @@ export const TrailSpec = Joi.object()
     longitude: Joi.number().allow("").optional().example(7.5247),
     distance: Joi.number().allow("").optional().example(7.5),
     categoryid: IdSpec,
+    img: Joi.array().items(Joi.string()).optional().default([]),
   })
   .label("Trail");
 

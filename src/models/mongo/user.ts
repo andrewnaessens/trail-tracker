@@ -1,9 +1,8 @@
-import Mongoose from "mongoose";
+import { Schema, model }  from "mongoose";
+import { User } from "../../types/trail-tracker-types";
 import Boom from "@hapi/boom";
 
-const { Schema } = Mongoose;
-
-const userSchema = new Schema({
+const userSchema = new Schema<User>({
   firstName: String,
   lastName: String,
   email: String,
@@ -14,7 +13,7 @@ userSchema.statics.findByEmail = function (email) {
   return this.findOne({ email: email });
 };
 
-userSchema.methods.comparePassword = function (candidatePassword) {
+userSchema.methods.comparePassword = function (candidatePassword: string) {
   const isMatch = this.password === candidatePassword;
   if (!isMatch) {
     throw Boom.unauthorized("Password mismatch");
@@ -22,4 +21,4 @@ userSchema.methods.comparePassword = function (candidatePassword) {
   return this;
 };
 
-export const User = Mongoose.model("User", userSchema);
+export const UserMongoose = model("User", userSchema);
