@@ -1,5 +1,6 @@
 import Boom from "@hapi/boom";
 import { IdSpec, CategoryArraySpec, CategorySpec, CategorySpecPlus } from "../models/joi-schemas.js";
+import { Request, ResponseToolkit } from "@hapi/hapi";
 import { db } from "../models/db.js";
 import { validationError } from "./logger.js";
 
@@ -8,7 +9,7 @@ export const categoryApi = {
     auth: {
       strategy: "jwt",
     },
-    handler: async function (request, h) {
+    handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const categories = await db.categoryStore.getAllCategories();
         return categories;
@@ -22,11 +23,30 @@ export const categoryApi = {
     notes: "Returns all categories",
   },
 
+  findByUserId: {
+    auth: {
+      strategy: "jwt",
+    },
+    handler: async function (request: Request, h: ResponseToolkit) {
+      try {
+        const categories = await db.categoryStore.getUserCategories(request.params.id);
+        return categories;
+      } catch (err) {
+        return Boom.serverUnavailable("Database Error");
+      }
+    },
+    tags: ["api"],
+    description: "Get all categories for a specific user",
+    notes: "Returns all categories for a specific user",
+    validate: { params: { id: IdSpec }, failAction: validationError },
+    response: { schema: CategoryArraySpec, failAction: validationError },
+  },
+
   findOne: {
     auth: {
       strategy: "jwt",
     },
-    async handler(request) {
+    async handler(request: Request) {
       try {
         const category = await db.categoryStore.getCategoryById(request.params.id);
         if (!category) {
@@ -48,7 +68,7 @@ export const categoryApi = {
     auth: {
       strategy: "jwt",
     },
-    handler: async function (request, h) {
+    handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const category = request.payload;
         const newCategory = await db.categoryStore.addCategory(category);
@@ -71,7 +91,7 @@ export const categoryApi = {
     auth: {
       strategy: "jwt",
     },
-    handler: async function (request, h) {
+    handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const category = await db.categoryStore.getCategoryById(request.params.id);
         if (!category) {
@@ -92,7 +112,7 @@ export const categoryApi = {
     auth: {
       strategy: "jwt",
     },
-    handler: async function (request, h) {
+    handler: async function (request: Request, h: ResponseToolkit) {
       try {
         await db.categoryStore.deleteAllCategories();
         return h.response().code(204);
