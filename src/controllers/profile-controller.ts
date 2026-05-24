@@ -1,10 +1,11 @@
 import { UserSpec } from "../models/joi-schemas.js";
+import { Request, ResponseToolkit } from "@hapi/hapi";
 import { db } from "../models/db.js";
 import { analyticsService } from "../services/analytics-service.js";
 
 export const profileController = {
   index: {
-    handler: async function (request, h) {
+    handler: async function (request: Request, h: ResponseToolkit) {
       const user = await db.userStore.getUserById(request.params.id);
       console.log(user);
       const stats = await analyticsService.getUserAnalytics(user);
@@ -24,17 +25,18 @@ export const profileController = {
     validate: {
       payload: UserSpec,
       options: { abortEarly: false },
-      failAction: function (request, h, error) {
+      failAction: function (request: Request, h: ResponseToolkit, error: any) {
         return h.view("user-profile-view", { title: "Edit User error", errors: error.details }).takeover().code(400);
       },
     },
-    handler: async function (request, h) {
+    handler: async function (request: Request, h: ResponseToolkit) {
       const user = await db.userStore.getUserById(request.params.id);
+      const userPayload = request.payload as any;
       const newUser = {
-        firstName: request.payload.firstName,
-        lastName: request.payload.lastName,
-        email: request.payload.email,
-        password: request.payload.password,
+        firstName: userPayload.firstName,
+        lastName: userPayload.lastName,
+        email: userPayload.email,
+        password: userPayload.password,
       };
       await db.userStore.updateUser(user, newUser);
       return h.redirect("/login");
@@ -42,7 +44,7 @@ export const profileController = {
   },
 
   userAnalytics: {
-    handler: async function (request, h) {
+    handler: async function (request: Request, h: ResponseToolkit) {
       const user = await db.userStore.getUserById(request.params.id);
       const categories = await db.categoryStore.getUserCategories(user);
       let categoryCount = 0;
